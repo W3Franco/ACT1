@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Input Formula</title>
+</head>
+<body>
+    <h1>Input Your Formula</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Submit</button>
+    </form>
+
+    {% if result %}
+        <h2>Result: {{ result }}</h2>
+        {% if variables %}
+            <h3>Variables Used:</h3>
+            <ul>
+                {% for var in variables %}
+                    <li>{{ var }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+        {% if numbers %}
+            <h3>Numbers Used:</h3>
+            <ul>
+                {% for num in numbers %}
+                    <li>{{ num }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+        {% if operators %}
+            <h3>Operators Used:</h3>
+            <ul>
+                {% for op in operators %}
+                    <li>{{ op }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% elif error %}
+        <h2 style="color: red;">Error: {{ error }}</h2>
+    {% endif %}
+</body>
+</html>
